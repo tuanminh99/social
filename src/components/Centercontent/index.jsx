@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, Dropdown, Menu } from "antd";
 import React, { useState } from "react";
 import styled from "styled-components";
 import Avatar from "./../../assets/img/avatar.jpeg";
@@ -158,6 +158,16 @@ export const CenterContent = () => {
       ),
     },
   ];
+  function handleMenuClick(e) {
+    console.log("click", e);
+  }
+  const menu = (
+    <Menu onClick={handleMenuClick}>
+      <Menu.Item key="1">1st item</Menu.Item>
+      <Menu.Item key="2">2nd item</Menu.Item>
+      <Menu.Item key="3">3rd item</Menu.Item>
+    </Menu>
+  );
 
   const [search, setSearch] = useState();
   return (
@@ -176,7 +186,7 @@ export const CenterContent = () => {
         ))}
       </Story>
       <SearchBar>
-        <div>
+        <div style={{ width: "1000px" }}>
           <SearchWithImg
             imgSearch={imgSearch}
             value={search}
@@ -190,9 +200,64 @@ export const CenterContent = () => {
           </Button>
         </ButtonAdd>
       </SearchBar>
+      <Right3>
+        <ContactInfo>
+          <WrapContact>
+            <ContactImg>
+              <img
+                src={Avatar}
+                width="30px"
+                height="30px"
+                style={{ borderRadius: "10px", objectFit: "cover" }}
+                alt=""
+              />
+            </ContactImg>
+
+            <ContactName>
+              <Name>minh</Name>
+              <DropBtn>
+                <Dropdown.Button overlay={menu}></Dropdown.Button>
+              </DropBtn>
+            </ContactName>
+          </WrapContact>
+        </ContactInfo>
+      </Right3>
     </WrappStory>
   );
 };
+
+const DropBtn = styled.div``;
+
+const Name = styled.div`
+  font-weight: 700;
+`;
+
+const ContactName = styled.div`
+  display: flex;
+  padding: 10px 10px;
+`;
+
+const ContactImg = styled.div`
+  padding: 7px 0;
+`;
+
+const WrapContact = styled.div`
+  display: flex;
+`;
+
+const ContactInfo = styled.div`
+  display: block;
+  padding: 20px 18px 20px;
+`;
+
+const Right3 = styled.div`
+  margin-top: 20px;
+  width: 1105px;
+  margin-left: 8px;
+  background: white;
+  height: auto;
+  border-radius: 10px;
+`;
 
 const ButtonAdd = styled.div`
   z-index: 10;
@@ -229,14 +294,10 @@ const ImgAds = styled.div`
 `;
 
 const Left3 = styled.div`
-  /* background: white; */
   width: fit-content;
   height: auto;
   border-radius: 10px;
   padding: 0 10px;
 `;
 
-const WrappStory = styled.div`
-  /* display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
-`;
+const WrappStory = styled.div``;
