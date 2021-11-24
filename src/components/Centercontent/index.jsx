@@ -246,7 +246,6 @@ const WrapContact = styled.div`
 `;
 
 const ContactInfo = styled.div`
-  display: block;
   padding: 20px 18px 20px;
 `;
 
@@ -273,6 +272,7 @@ const SearchBar = styled.div`
 
 const Story = styled.div`
   display: flex;
+  justify-content: space-between;
 `;
 
 const AvatarImg = styled.div`
