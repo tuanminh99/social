@@ -1,16 +1,15 @@
-import React, { FC } from "react";
-import { Controller, useForm } from "react-hook-form";
-import styled from "styled-components";
-import { animated } from "react-spring";
-import { Button, Form, Input } from "antd";
 import {
-  DownloadOutlined,
   FacebookOutlined,
   GooglePlusOutlined,
   LinkedinOutlined,
   LockOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { Button, Form, Input } from "antd";
+import React from "react";
+import { Controller, useForm } from "react-hook-form";
+import { animated } from "react-spring";
+import styled from "styled-components";
 
 const Wrapper = styled(animated.div)`
   position: absolute;
@@ -18,10 +17,10 @@ const Wrapper = styled(animated.div)`
   bottom: 0;
   left: 0;
   right: 0;
-  margin: 80px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 const Fb = styled.div``;
 const Gg = styled.div`
@@ -57,11 +56,54 @@ const WrapInput = styled.div`
 `;
 
 const SigninInput = styled(Input)`
+  width: 300px;
+  height: 45px;
   input {
+    font-size: 13px;
     background-color: #f4f8f7;
+    ::placeholder {
+      font-size: 13px;
+    }
   }
 `;
 
+const Title = styled.p`
+  color: #ca0533;
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+`;
+
+const Des = styled.p`
+  color: grey;
+  margin-top: 20px;
+`;
+
+const Activate = styled.p`
+  color: grey;
+  margin-top: 20px;
+`;
+
+const ButtonSignIn = styled(Button)`
+  background: #ca0533;
+  color: white;
+  width: 200px;
+  height: 50px !important;
+  margin-top: 10px;
+  font-weight: 600;
+  :hover,
+  :active,
+  :focus {
+    background: #ca0533;
+    color: white;
+  }
+`;
+const Logo = styled.div`
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+`;
 export const SignInForm = ({ style = {} }) => {
   const {
     control,
@@ -75,12 +117,11 @@ export const SignInForm = ({ style = {} }) => {
     console.log(data);
     // TODO: call api to login
   });
-
   return (
     <Wrapper style={style}>
-      <h1 style={{ color: "#1d998c" }}>Sign In</h1>
+      <Title>Sign in to TLU Social Network</Title>
 
-      <SocialNet>
+      {/* <SocialNet>
         <Fb>
           <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">
             <FbIcon style={{ color: "black" }} />
@@ -96,10 +137,9 @@ export const SignInForm = ({ style = {} }) => {
             <InIcon style={{ color: "black" }} />
           </a>
         </In>
-      </SocialNet>
-      <p style={{ color: "grey", marginTop: "20px" }}>
-        or use your email account
-      </p>
+      </SocialNet> */}
+      <Des>or use your email account</Des>
+
       <WrapInput>
         <Form.Item>
           <Controller
@@ -107,9 +147,14 @@ export const SignInForm = ({ style = {} }) => {
             name="username"
             render={({ field: { value, onChange, onBlur } }) => (
               <SigninInput
+                size="large"
                 {...{ value, onChange, onBlur }}
-                prefix={<UserOutlined />}
-                placeholder="Email"
+                prefix={
+                  <Logo>
+                    <UserOutlined style={{ color: "grey" }} />
+                  </Logo>
+                }
+                placeholder="Username"
                 style={{ backgroundColor: "#f4f8f7", border: "none" }}
               />
             )}
@@ -121,9 +166,14 @@ export const SignInForm = ({ style = {} }) => {
             name="password"
             render={({ field: { value, onChange, onBlur } }) => (
               <SigninInput
+                size="large"
                 {...{ value, onChange, onBlur }}
                 type="password"
-                prefix={<LockOutlined />}
+                prefix={
+                  <Logo>
+                    <LockOutlined style={{ color: "grey" }} />
+                  </Logo>
+                }
                 placeholder="Password"
                 style={{ backgroundColor: "#f4f8f7", border: "none" }}
               />
@@ -131,14 +181,15 @@ export const SignInForm = ({ style = {} }) => {
           />
         </Form.Item>
       </WrapInput>
-      <Button
+      <ButtonSignIn
         type="default"
+        size="large"
         shape="round"
         onClick={handleSignIn}
-        style={{ background: "#1d998c", color: "white" }}
       >
         Sign In
-      </Button>
+      </ButtonSignIn>
+      <Activate>Tài khoản chưa kích hoạt ?</Activate>
     </Wrapper>
   );
 };

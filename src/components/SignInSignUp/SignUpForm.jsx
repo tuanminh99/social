@@ -1,12 +1,15 @@
-import React, { FC } from "react";
-import { Controller, useForm } from "react-hook-form";
-import styled from "styled-components";
-import { animated } from "react-spring";
 import {
   FacebookOutlined,
   GooglePlusOutlined,
   LinkedinOutlined,
+  LockOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
+import { Button, Form, Input } from "antd";
+import React from "react";
+import { Controller, useForm } from "react-hook-form";
+import { animated } from "react-spring";
+import styled from "styled-components";
 
 const Wrapper = styled(animated.div)`
   position: absolute;
@@ -18,6 +21,7 @@ const Wrapper = styled(animated.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 const Fb = styled.div``;
 const Gg = styled.div`
@@ -49,6 +53,61 @@ const InIcon = styled(LinkedinOutlined)`
   }
 `;
 
+const WrapInput = styled.div`
+  margin-top: 20px;
+`;
+
+const Title = styled.p`
+  color: #f7341b;
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+`;
+
+const Des = styled.p`
+  color: grey;
+  margin-top: 20px;
+`;
+
+const LoginNotification = styled.p`
+  color: grey;
+  margin-top: 20px;
+`;
+
+const ButtonSignUp = styled(Button)`
+  background: #f7341b;
+  color: white;
+  width: 200px;
+  height: 50px !important;
+  margin-top: 10px;
+  font-weight: 600;
+  :hover {
+    background: #f7341b;
+    color: white;
+  }
+`;
+
+const SignUpInput = styled(Input)`
+  width: 300px;
+  height: 40px;
+  background-color: #f4f8f7;
+  border: none;
+  input {
+    font-size: 13px;
+    background-color: #f4f8f7;
+    ::placeholder {
+      font-size: 13px;
+    }
+  }
+`;
+
+const Logo = styled.div`
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+`;
+
 export const SignUpForm = ({ style = {} }) => {
   const form = useForm({
     defaultValues: { username: "", password: "", confirmPassword: "" },
@@ -62,8 +121,8 @@ export const SignUpForm = ({ style = {} }) => {
 
   return (
     <Wrapper style={style}>
-      <h1>Create Account</h1>
-      <SocialNet>
+      <Title>Create Account TLU Social Network</Title>
+      {/* <SocialNet>
         <Fb>
           <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">
             <FbIcon style={{ color: "black" }} />
@@ -79,29 +138,93 @@ export const SignUpForm = ({ style = {} }) => {
             <InIcon style={{ color: "black" }} />
           </a>
         </In>
-      </SocialNet>
-      <Controller
-        control={control}
-        name="username"
-        render={({ field: { value, onChange, onBlur } }) => (
-          <input {...{ value, onChange, onBlur }} />
-        )}
-      />
-      <Controller
-        control={control}
-        name="password"
-        render={({ field: { value, onChange, onBlur } }) => (
-          <input {...{ value, onChange, onBlur }} type="password" />
-        )}
-      />
-      <Controller
-        control={control}
-        name="confirmPassword"
-        render={({ field: { value, onChange, onBlur } }) => (
-          <input {...{ value, onChange, onBlur }} type="password" />
-        )}
-      />
-      <button onClick={handleSignUp}>Sign Up</button>
+      </SocialNet> */}
+      <Des>Join the social network to experience</Des>
+      <WrapInput>
+        <Form.Item>
+          <Controller
+            control={control}
+            name="email"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <SignUpInput
+                size="large"
+                prefix={
+                  <Logo>
+                    <LockOutlined style={{ color: "grey" }} />
+                  </Logo>
+                }
+                placeholder="Email"
+                {...{ value, onChange, onBlur }}
+              />
+            )}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Controller
+            control={control}
+            name="username"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <SignUpInput
+                size="large"
+                prefix={
+                  <Logo>
+                    <UserOutlined style={{ color: "grey" }} />
+                  </Logo>
+                }
+                placeholder="Username"
+                {...{ value, onChange, onBlur }}
+              />
+            )}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Controller
+            control={control}
+            name="password"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <SignUpInput
+                size="large"
+                prefix={
+                  <Logo>
+                    <LockOutlined style={{ color: "grey" }} />
+                  </Logo>
+                }
+                placeholder="Password"
+                {...{ value, onChange, onBlur }}
+                type="password"
+              />
+            )}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Controller
+            control={control}
+            name="confirmPassword"
+            render={({ field: { value, onChange, onBlur } }) => (
+              <SignUpInput
+                size="large"
+                prefix={
+                  <Logo>
+                    <LockOutlined style={{ color: "grey" }} />
+                  </Logo>
+                }
+                placeholder="Re-password"
+                {...{ value, onChange, onBlur }}
+                type="password"
+              />
+            )}
+          />
+        </Form.Item>
+      </WrapInput>
+      <ButtonSignUp
+        type="default"
+        size="large"
+        shape="round"
+        onClick={handleSignUp}
+      >
+        Sign Up
+      </ButtonSignUp>
+      <LoginNotification>Đăng nhập nếu có tài khoản !</LoginNotification>
     </Wrapper>
   );
 };
